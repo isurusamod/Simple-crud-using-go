@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "grpc-user-crud/proto";
+
+service UserService {
+  // Create a new user
+  rpc CreateUser (User) returns (UserResponse);
+
+  // Get a user by ID
+  rpc GetUser (UserRequest) returns (UserResponse);
+
+  // Update an existing user
+  rpc UpdateUser (User) returns (UserResponse);
+
+  // Delete a user by ID
+  rpc DeleteUser (UserRequest) returns (DeleteResponse);
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message UserRequest {
+  string id = 1;  // Only ID needed for Get and Delete
+}
+
+message UserResponse {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message DeleteResponse {
+  string message = 1; // Success message after deletion
+}
